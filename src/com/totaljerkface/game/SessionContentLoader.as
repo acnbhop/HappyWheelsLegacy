@@ -90,7 +90,7 @@ package com.totaljerkface.game
             {
                 Settings.hideVehicle = false;
                 _loc3_ = Settings.useCompressedTextures ? "_cmp" : "";
-                _loc4_ = Settings.pathPrefix + Settings.levelPath + "level" + this.levelDataObject.id + _loc3_ + ".swf";
+                _loc4_ = Settings.levelPath + "level" + this.levelDataObject.id + _loc3_ + ".swf";
                 this.levelLoader = new SwfLoader(_loc4_);
                 this.levelLoader.addEventListener(Event.COMPLETE,this.levelLoaded);
                 this.levelLoader.loadSWF();
@@ -128,7 +128,7 @@ package com.totaljerkface.game
         private function loadCharacter() : void
         {
             trace("char index " + this.characterIndex);
-            var _loc1_:* = Settings.pathPrefix + Settings.characterPath + "character" + this.characterIndex + ".swf";
+            var _loc1_:* = Settings.characterPath + "character" + this.characterIndex + ".swf";
             this.characterLoader = new SwfLoader(_loc1_);
             this.characterLoader.addEventListener(Event.COMPLETE,this.characterLoaded);
             this.characterLoader.addEventListener(IOErrorEvent.IO_ERROR,this.SWFIOErrorHandler);

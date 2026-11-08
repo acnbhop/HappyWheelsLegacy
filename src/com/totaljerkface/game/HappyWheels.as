@@ -64,8 +64,11 @@ package com.totaljerkface.game
             trace(root.loaderInfo.url);
             var _loc1_:String = root.loaderInfo.url;
 
-            Settings.siteURL = "http://localhost:8080/";
-            Settings.pathPrefix = "./";
+            //Settings.siteURL = "http://localhost:8080/";
+            //Settings.pathPrefix = "./";
+
+            Settings.initPaths();
+
             if (ExternalInterface.available)
             {
                 BlastedMouseWheelBlock.initialize(stage, "happyswf");

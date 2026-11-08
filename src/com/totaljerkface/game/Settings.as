@@ -71,11 +71,13 @@ package com.totaljerkface.game
         
         public static var numBackgroundLayers:int = 5;
         
-        public static const characterPath:String = "characters/";
+        public static var characterPath:String = "";
         
-        public static const levelPath:String = "levels/";
+        public static var levelPath:String = "";
         
-        public static const imagePath:String = "game_images/";
+        public static var imagePath:String = "";
+
+        public static var soundSWF:String = "";
         
         public static var siteURL:String = "";
         
@@ -161,10 +163,20 @@ package com.totaljerkface.game
         {
             super();
         }
+
+        public static function initPaths() : void
+        {
+            siteURL = "http://localhost:8080/";
+            pathPrefix = "../../assets/";
+            soundSWF = pathPrefix + "sounds.swf";
+            characterPath = pathPrefix + "characters/";
+            levelPath = pathPrefix + "levels/";
+            imagePath = pathPrefix + "game_images/";
+        }
         
         public static function get characterSWF() : String
         {
-            return pathPrefix + characterPath + "character" + characterIndex.toString() + ".swf";
+            return characterPath + "character" + characterIndex.toString() + ".swf";
         }
         
         public static function get currentSession() : Session

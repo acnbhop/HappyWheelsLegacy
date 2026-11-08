@@ -36,7 +36,7 @@ package com.totaljerkface.game
 
         public function loadSound(param1:String):void
         {
-            var _loc2_:URLRequest = new URLRequest(Settings.pathPrefix + "happy_sounds_v1_72.swf");
+            var _loc2_:URLRequest = new URLRequest(Settings.soundSWF);
             this.urlLoader = new URLLoader();
             this.urlLoader.dataFormat = URLLoaderDataFormat.BINARY;
             this.urlLoader.addEventListener(Event.COMPLETE, this.bytesComplete, false, 0, true);

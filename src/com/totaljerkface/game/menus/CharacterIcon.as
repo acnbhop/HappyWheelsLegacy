@@ -65,8 +65,8 @@ package com.totaljerkface.game.menus
             trace("loadBitmap");
             this.loaderBW = new Loader();
             this.loaderColor = new Loader();
-            var _loc1_:URLRequest = new URLRequest(Settings.pathPrefix + Settings.imagePath + fileString + this.index + "_bw.png");
-            var _loc2_:URLRequest = new URLRequest(Settings.pathPrefix + Settings.imagePath + fileString + this.index + ".png");
+            var _loc1_:URLRequest = new URLRequest(Settings.imagePath + fileString + this.index + "_bw.png");
+            var _loc2_:URLRequest = new URLRequest(Settings.imagePath + fileString + this.index + ".png");
             trace("urlReq " + _loc1_.url);
             this.loaderBW.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR,this.IOErrorHandler,false,0,true);
             this.loaderColor.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR,this.IOErrorHandler,false,0,true);
