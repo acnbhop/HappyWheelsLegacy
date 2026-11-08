@@ -66,27 +66,43 @@ package com.totaljerkface.game.editor
             this.init();
         }
 
-        private function init():void
+    private function init():void
+    {
+        var isLoggedIn:Boolean = Settings.user_id > 0;
+        this.loaderText.embedFonts = this.errorText.embedFonts = true;
+
+        if (isLoggedIn)
         {
-            this.loaderText.embedFonts = this.errorText.embedFonts = true;
             this.loadButton = new GenericButton("Load Level", 16613761, 200);
             this.loadButton.x = 20;
             this.loadButton.y = 260;
             addChild(this.loadButton);
             this.loadButton.addEventListener(MouseEvent.MOUSE_UP, this.loadSelected);
+
             this.deleteButton = new GenericButton("Delete Level", 16776805, 200, 0);
             this.deleteButton.x = 20;
             this.deleteButton.y = this.loadButton.y + 28;
             addChild(this.deleteButton);
             this.deleteButton.addEventListener(MouseEvent.MOUSE_UP, this.deleteSelected);
-            this.importButton = new GenericButton("Import Level Data", 4032711, 200);
-            this.importButton.x = 20;
-            this.importButton.y = 408;
-            addChild(this.importButton);
-            this.importButton.addEventListener(MouseEvent.MOUSE_UP, this.importLevel);
+        }
+        else 
+        {
+            this.refreshButton.visible = false;
+            this.loaderText.text = "You must log in to browse online levels.";
+        }
+
+        this.importButton = new GenericButton("Import Level Data", 4032711, 200);
+        this.importButton.x = 20;
+        this.importButton.y = isLoggedIn ? 408 : 260; // Shifts up if offline buttons are hidden
+        addChild(this.importButton);
+        this.importButton.addEventListener(MouseEvent.MOUSE_UP, this.importLevel);
+
+        this.buildWindow();
+        this._window.resize();
+
+        if (isLoggedIn)
+        {
             this.refreshButton.buttonMode = true;
-            this.buildWindow();
-            this._window.resize();
             if (levelDataArray)
             {
                 this.refreshButton.addEventListener(MouseEvent.MOUSE_UP, this.loadLevels, false, 0, true);
@@ -97,6 +113,7 @@ package com.totaljerkface.game.editor
                 this.loadLevels();
             }
         }
+    }
 
         public function loadLevels(param1:MouseEvent = null):void
         {
@@ -361,7 +378,14 @@ package com.totaljerkface.game.editor
 
         public function die():void
         {
-            this.loadButton.removeEventListener(MouseEvent.MOUSE_UP, this.loadSelected);
+            if (this.loadButton)
+            {
+                this.loadButton.removeEventListener(MouseEvent.MOUSE_UP, this.loadSelected);
+            }
+            if (this.deleteButton)
+            {
+                this.deleteButton.removeEventListener(MouseEvent.MOUSE_UP, this.deleteSelected);
+            }
             this.importButton.removeEventListener(MouseEvent.MOUSE_UP, this.importLevel);
             this.refreshButton.removeEventListener(MouseEvent.MOUSE_UP, this.loadLevels);
             this.refreshButton.removeEventListener(Event.ENTER_FRAME, this.spin);

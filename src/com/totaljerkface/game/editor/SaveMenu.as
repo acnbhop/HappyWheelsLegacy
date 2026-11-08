@@ -65,6 +65,8 @@ package com.totaljerkface.game.editor
 
         private function init():void
         {
+            var canPublishLevel:Boolean = Settings.user_id > 0;
+    
             var _loc2_:TextField = null;
             this.nameText.autoSize = this.commentsText.autoSize = TextFieldAutoSize.NONE;
             this.nameText.selectable = this.commentsText.selectable = true;
@@ -77,6 +79,7 @@ package com.totaljerkface.game.editor
             this.commentsText.maxChars = this.maxCommentChars;
             this.commentsText.restrict = this.nameText.restrict = "a-z A-Z 0-9 !@#$%\\^&*()_+\\-=;\'|?/,.<> \"";
             addEventListener(Event.ENTER_FRAME, this.setCharText);
+    
             var _loc1_:TextFormat = new TextFormat("HelveticaNeueLT Std", 11, 4032711, null, null, null, null, null, TextFormatAlign.LEFT);
             _loc2_ = new TextField();
             _loc2_.defaultTextFormat = _loc1_;
@@ -87,24 +90,28 @@ package com.totaljerkface.game.editor
             _loc2_.selectable = false;
             _loc2_.embedFonts = true;
             _loc2_.antiAliasType = AntiAliasType.ADVANCED;
-            _loc2_.text = "Read these rules and follow them!";
+            _loc2_.text = canPublishLevel ? "Read these rules and follow them!" : "You must log in to save levels online.";
+    
             this.rulesSprite = new Sprite();
             this.rulesSprite.buttonMode = true;
             this.rulesSprite.x = 20;
             this.rulesSprite.y = 190;
             this.rulesSprite.addChild(_loc2_);
             addChild(this.rulesSprite);
-            var _loc3_:CreditsLink = new CreditsLink(this.rulesSprite, "level_rules.php");
-            _loc3_.colorTransform = new ColorTransform(0.71, 0.71, 0.71, 1, 0, 0, 0, 0);
-            this.saveNewButton = new GenericButton("Save New Level", 16613761, 200);
-            this.saveNewButton.x = 20;
-            this.saveNewButton.y = 215;
-            addChild(this.saveNewButton);
-            this.saveNewButton.addEventListener(MouseEvent.MOUSE_UP, this.savePressHandler);
-            this.saveNewButton.addEventListener(MouseEvent.ROLL_OVER, this.rollOverHandler);
-            if (this.levelDataObject)
+    
+            if (canPublishLevel)
             {
-                if (!this.levelDataObject.isPublic)
+                var _loc3_:CreditsLink = new CreditsLink(this.rulesSprite, "level_rules.php");
+                _loc3_.colorTransform = new ColorTransform(0.71, 0.71, 0.71, 1, 0, 0, 0, 0);
+    
+                this.saveNewButton = new GenericButton("Save New Level", 16613761, 200);
+                this.saveNewButton.x = 20;
+                this.saveNewButton.y = 215;
+                addChild(this.saveNewButton);
+                this.saveNewButton.addEventListener(MouseEvent.MOUSE_UP, this.savePressHandler);
+                this.saveNewButton.addEventListener(MouseEvent.ROLL_OVER, this.rollOverHandler);
+    
+                if (this.levelDataObject && !this.levelDataObject.isPublic)
                 {
                     this.saveOverwriteButton = new GenericButton("Overwrite Current Level", 16613761, 200);
                     this.saveOverwriteButton.x = 20;
@@ -116,12 +123,14 @@ package com.totaljerkface.game.editor
                     this.comments = this.levelDataObject.comments;
                 }
             }
+    
             this.copyLevelButton = new GenericButton("Copy Leveldata to Clipboard", 4032711, 200);
             this.copyLevelButton.x = 20;
             this.copyLevelButton.y = this.levelText.y + 58;
             addChild(this.copyLevelButton);
             this.copyLevelButton.addEventListener(MouseEvent.MOUSE_UP, this.copyLevelText);
             this.copyLevelButton.addEventListener(MouseEvent.ROLL_OVER, this.rollOverHandler);
+    
             this.levelText.text = SaverLoader.instance.createXML(true).toXMLString();
             this.levelText.addEventListener(MouseEvent.MOUSE_DOWN, this.mouseDownTextHandler);
             this.buildWindow();
@@ -283,8 +292,13 @@ package com.totaljerkface.game.editor
         {
             this._window.removeEventListener(Window.WINDOW_CLOSED, this.windowClosed);
             this._window.closeWindow();
-            this.saveNewButton.removeEventListener(MouseEvent.MOUSE_UP, this.savePressHandler);
-            this.saveNewButton.removeEventListener(MouseEvent.ROLL_OVER, this.rollOverHandler);
+
+            if (this.saveNewButton)
+            {
+                this.saveNewButton.removeEventListener(MouseEvent.MOUSE_UP, this.savePressHandler);
+                this.saveNewButton.removeEventListener(MouseEvent.ROLL_OVER, this.rollOverHandler);
+            }
+
             if (this.saveOverwriteButton)
             {
                 this.saveOverwriteButton.removeEventListener(MouseEvent.MOUSE_UP, this.savePressHandler);

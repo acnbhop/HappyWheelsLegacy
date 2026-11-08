@@ -147,16 +147,19 @@ package com.totaljerkface.game.editor
             this.debugCheck.addEventListener(ValueEvent.VALUE_CHANGE, this.debugToggle);
             this.fullScreenCheck.addEventListener(ValueEvent.VALUE_CHANGE, this.fullScreenToggle);
             HelpWindow.instance.addEventListener(Window.WINDOW_CLOSED, this.helpClosed);
-            if (Settings.user_id > 0)
-            {
-                this.saveButton.addEventListener(MouseEvent.MOUSE_UP, this.openSaveMenu);
-                this.loadButton.addEventListener(MouseEvent.MOUSE_UP, this.openLoadMenu);
-            }
-            else
-            {
-                this.saveButton.addEventListener(MouseEvent.MOUSE_UP, this.openLoginWarning);
-                this.loadButton.addEventListener(MouseEvent.MOUSE_UP, this.openLoginWarning);
-            }
+            this.saveButton.addEventListener(MouseEvent.MOUSE_UP, this.openSaveMenu);
+            this.loadButton.addEventListener(MouseEvent.MOUSE_UP, this.openLoadMenu);
+
+            //if (Settings.user_id > 0)
+            //{
+            //    this.saveButton.addEventListener(MouseEvent.MOUSE_UP, this.openSaveMenu);
+            //    this.loadButton.addEventListener(MouseEvent.MOUSE_UP, this.openLoadMenu);
+            //}
+            //else
+            //{
+            //    this.saveButton.addEventListener(MouseEvent.MOUSE_UP, this.openLoginWarning);
+            //    this.loadButton.addEventListener(MouseEvent.MOUSE_UP, this.openLoginWarning);
+            //}
         }
 
         private function rollOverHandler(param1:MouseEvent):void

@@ -176,16 +176,16 @@ package com.totaljerkface.game.editor
             this.saverLoader = new SaverLoader(this.canvas);
             this.saverLoader.addEventListener(SaverLoader.CLEAR_STAGE,this.clearStage);
             this.saverLoader.addEventListener(SaverLoader.UPDATE_COPIED_VERTS,this.updateCopiedVerts);
-            if(Settings.user_id <= 0)
-            {
-                this.putShitOnHold();
-                this.loginPrompt = new PromptSprite("You are not currently logged in.  Login or register for free above to save and share your creations with others who might possibly care.","ok");
-                _loc1_ = this.loginPrompt.window;
-                addChild(_loc1_);
-                _loc1_.center();
-                this.loginPrompt.addEventListener(PromptSprite.BUTTON_PRESSED,this.loginPromptAccepted);
-                return;
-            }
+            //if(Settings.user_id <= 0)
+            //{
+            //    this.putShitOnHold();
+            //    this.loginPrompt = new PromptSprite("You are not currently logged in.  Login or register for free above to save and share your creations with others who might possibly care.","ok");
+            //    _loc1_ = this.loginPrompt.window;
+            //    addChild(_loc1_);
+            //    _loc1_.center();
+            //    this.loginPrompt.addEventListener(PromptSprite.BUTTON_PRESSED,this.loginPromptAccepted);
+            //    return;
+            //}
             if(Settings.disableUpload)
             {
                 this.putShitOnHold();
