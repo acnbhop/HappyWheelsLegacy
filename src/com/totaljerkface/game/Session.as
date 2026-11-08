@@ -367,12 +367,14 @@ package com.totaljerkface.game
             {
                 this._level.endBlock.removeEventListener(SessionEvent.COMPLETED,this.levelComplete);
             }
-            var _loc1_:b2Body = this.m_world.GetBodyList();
-            while(_loc1_)
-            {
-                this.m_world.DestroyBody(_loc1_);
-                _loc1_ = _loc1_.m_next;
-            }
+
+            //var _loc1_:b2Body = this.m_world.GetBodyList();
+            //while(_loc1_)
+            //{
+            //    this.m_world.DestroyBody(_loc1_);
+            //    _loc1_ = _loc1_.m_next;
+            //}
+
             this.m_world = null;
             this._character.removeKeyListeners();
             this._character.removeEventListener(ReplayEvent.ADD_ENTRY,this.addReplayEntry);

@@ -131,12 +131,14 @@ package com.totaljerkface.game
                 fpsTimer.stop();
                 fpsTimer.removeEventListener(TimerEvent.TIMER,setFps);
             }
-            var _loc1_:b2Body = m_world.GetBodyList();
-            while(_loc1_)
-            {
-                m_world.DestroyBody(_loc1_);
-                _loc1_ = _loc1_.m_next;
-            }
+            
+            //var _loc1_:b2Body = m_world.GetBodyList();
+            //while(_loc1_)
+            //{
+            //    m_world.DestroyBody(_loc1_);
+            //    _loc1_ = _loc1_.m_next;
+            //}
+
             m_world = null;
             _character.die();
             _character = null;
