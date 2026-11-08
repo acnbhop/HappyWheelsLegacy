@@ -183,11 +183,17 @@ package com.totaljerkface.game
             var _loc12_:XMLList = this._levelXML.joints.j;
             var _loc13_:XMLList = this._levelXML.triggers.t;
             this._levelVersion = Number(_loc8_.@v);
-            if(this._levelVersion > Settings.CURRENT_VERSION)
-            {
-                Settings.debugText.text = "This Level is from a newer version of Happy Wheels.  Clear cache and reload";
-                throw new Error("This Level is from a newer version of Happy Wheels.  Clear cache and reload");
-            }
+
+            //
+            // TEMP | Allow loading of newer Happy Wheels levels, will need to add a disclaimer that
+            //        it may NOT work correctly.
+            //
+
+            //if(this._levelVersion > Settings.CURRENT_VERSION)
+            //{
+            //    Settings.debugText.text = "This Level is from a newer version of Happy Wheels.  Clear cache and reload";
+            //    throw new Error("This Level is from a newer version of Happy Wheels.  Clear cache and reload");
+            //}
             var _loc25_:int = int(_loc9_.length());
             var _loc26_:Array = new Array();
             var _loc27_:Array = new Array();
